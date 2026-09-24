@@ -1,0 +1,21 @@
+{
+  "name": "securepay",
+  "version": "1.0.0",
+  "description": "SecurePay - Full-Stack Fintech Platform with Rule-Based Fraud Detection Engine",
+  "scripts": {
+    "start": "start.bat",
+    "backend": "cd backend && node server.js",
+    "frontend": "cd frontend && npm run dev",
+    "test": "cd backend && node test_api.js",
+    "test:refund": "cd backend && node test_fraud_decision.js"
+  },
+  "keywords": [
+    "fintech",
+    "fraud-detection",
+    "react",
+    "express",
+    "mongodb"
+  ],
+  "author": "",
+  "license": "ISC"
+}
