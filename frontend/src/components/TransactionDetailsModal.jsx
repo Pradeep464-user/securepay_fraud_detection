@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { X, ShieldAlert, CheckCircle2, Clock, AlertTriangle, UserCheck } from 'lucide-react';
 
 export default function TransactionDetailsModal({ transaction, onClose }) {
@@ -94,7 +94,7 @@ export default function TransactionDetailsModal({ transaction, onClose }) {
           </div>
         </div>
 
-        {/* Rule-Based Fraud Detection Analysis */}
+        {/* Transaction Summary & Status */}
         <div style={{
           background: 'rgba(15, 23, 42, 0.9)',
           border: '1px solid var(--border-color)',
@@ -102,74 +102,31 @@ export default function TransactionDetailsModal({ transaction, onClose }) {
           padding: '1.25rem',
           marginBottom: '1.5rem'
         }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-            <h3 style={{ fontSize: '0.95rem', fontWeight: '700', color: '#fff', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <ShieldAlert size={18} color="#60a5fa" />
-              Rule-Based Fraud Engine Evaluation
-            </h3>
-            <span className={`badge badge-${riskLevel?.toLowerCase()}`}>
-              {riskLevel} RISK ({riskScore}/100)
-            </span>
-          </div>
+          <h3 style={{ fontSize: '0.95rem', fontWeight: '700', color: '#fff', display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+            <CheckCircle2 size={18} color="#60a5fa" />
+            Transaction Information
+          </h3>
 
-          <div className="risk-meter-bar">
-            <div
-              className={`risk-fill ${getRiskClass(riskLevel)}`}
-              style={{ width: `${Math.max(5, riskScore)}%` }}
-            />
-          </div>
-
-          {/* Breakdown Pills */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem', marginTop: '0.75rem' }}>
-            <div style={{ background: 'rgba(255,255,255,0.04)', padding: '0.65rem', borderRadius: '0.5rem', textAlign: 'center' }}>
-              <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'block' }}>Amount Risk</span>
-              <span style={{ fontWeight: '700', fontFamily: 'var(--font-mono)', color: breakdown?.amountScore > 30 ? '#f87171' : '#34d399' }}>
-                {breakdown?.amountScore || 0} / 100
-              </span>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem' }}>
+            <div style={{ background: 'rgba(255,255,255,0.03)', padding: '0.65rem', borderRadius: '0.5rem' }}>
+              <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'block' }}>Payment Method</span>
+              <span style={{ fontWeight: '600', color: '#e2e8f0', fontSize: '0.85rem' }}>SecurePay P2P Electronic Transfer</span>
             </div>
 
-            <div style={{ background: 'rgba(255,255,255,0.04)', padding: '0.65rem', borderRadius: '0.5rem', textAlign: 'center' }}>
-              <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'block' }}>Velocity Risk</span>
-              <span style={{ fontWeight: '700', fontFamily: 'var(--font-mono)', color: breakdown?.frequencyScore > 30 ? '#f87171' : '#34d399' }}>
-                {breakdown?.frequencyScore || 0} / 100
-              </span>
-            </div>
-
-            <div style={{ background: 'rgba(255,255,255,0.04)', padding: '0.65rem', borderRadius: '0.5rem', textAlign: 'center' }}>
-              <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'block' }}>Timing Risk</span>
-              <span style={{ fontWeight: '700', fontFamily: 'var(--font-mono)', color: breakdown?.timingScore > 30 ? '#f87171' : '#34d399' }}>
-                {breakdown?.timingScore || 0} / 100
-              </span>
+            <div style={{ background: 'rgba(255,255,255,0.03)', padding: '0.65rem', borderRadius: '0.5rem' }}>
+              <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'block' }}>Date & Timestamp</span>
+              <span style={{ fontWeight: '600', color: '#e2e8f0', fontSize: '0.85rem' }}>{new Date(createdAt).toLocaleString()}</span>
             </div>
           </div>
 
-          {/* Triggered Rule Reasons */}
-          <div style={{ marginTop: '1rem' }}>
-            <span style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
-              Evaluation Findings & Triggered Rules:
-            </span>
-            <ul style={{ listStyle: 'none', padding: 0, marginTop: '0.5rem' }}>
-              {breakdown?.reasons && breakdown.reasons.length > 0 ? (
-                breakdown.reasons.map((reason, idx) => (
-                  <li
-                    key={idx}
-                    style={{
-                      fontSize: '0.8rem',
-                      color: '#cbd5e1',
-                      padding: '0.35rem 0.5rem',
-                      background: 'rgba(255,255,255,0.02)',
-                      borderLeft: '3px solid #60a5fa',
-                      marginBottom: '0.35rem',
-                      borderRadius: '0 4px 4px 0'
-                    }}
-                  >
-                    • {reason}
-                  </li>
-                ))
-              ) : (
-                <li style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Standard transaction within parameters.</li>
-              )}
-            </ul>
+          <div style={{ marginTop: '0.85rem', padding: '0.75rem', background: 'rgba(255,255,255,0.02)', borderRadius: '0.5rem', border: '1px solid var(--border-color)' }}>
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'block', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Status Details</span>
+            <p style={{ fontSize: '0.85rem', color: '#cbd5e1', margin: 0 }}>
+              {status === 'COMPLETED' && 'This payment was successfully cleared and transferred to the recipient.'}
+              {status === 'UNDER_REVIEW' && 'This payment is currently undergoing standard banking verification. Funds will be released upon completion.'}
+              {status === 'FRAUD' && 'This payment was cancelled by compliance. Debited funds have been credited back to the sender account.'}
+              {status === 'MONITORED' && 'This payment completed normally and has been archived.'}
+            </p>
           </div>
         </div>
 

@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Wallet,
   Send,
@@ -226,9 +226,8 @@ export default function UserDashboard({ token, user, onLogout }) {
                     <th>Date / Time</th>
                     <th>Type & Counterparty</th>
                     <th>Amount</th>
-                    <th>Fraud Engine Risk</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    <th>Receipt</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -272,13 +271,6 @@ export default function UserDashboard({ token, user, onLogout }) {
                           {isSender ? `-$${tx.amount.toLocaleString()}` : `+$${tx.amount.toLocaleString()}`}
                         </td>
                         <td>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                            <span className={`badge badge-${tx.riskLevel?.toLowerCase()}`}>
-                              {tx.riskLevel} ({tx.riskScore})
-                            </span>
-                          </div>
-                        </td>
-                        <td>
                           <span className={`badge badge-${tx.status?.toLowerCase()}`}>
                             {tx.status}
                           </span>
@@ -289,7 +281,7 @@ export default function UserDashboard({ token, user, onLogout }) {
                             className="btn-secondary"
                             style={{ fontSize: '0.75rem', padding: '0.35rem 0.65rem' }}
                           >
-                            <Info size={14} /> Analysis
+                            <FileText size={14} /> Receipt
                           </button>
                         </td>
                       </tr>

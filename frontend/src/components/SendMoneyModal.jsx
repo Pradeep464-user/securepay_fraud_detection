@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Send, X, AlertCircle, CheckCircle2, ShieldAlert, Sparkles, Clock } from 'lucide-react';
 
 export default function SendMoneyModal({ userBalance, token, onClose, onTransactionComplete }) {
@@ -143,7 +143,7 @@ export default function SendMoneyModal({ userBalance, token, onClose, onTransact
                   <CheckCircle2 size={20} color="#34d399" />
                 )}
                 <strong style={{ color: '#fff', fontSize: '0.95rem' }}>
-                  {result.transaction.riskLevel === 'HIGH' ? 'Flagged for Security Review' : 'Payment Processed'}
+                  {result.transaction.status === 'UNDER_REVIEW' ? 'Payment Held for Security Verification' : 'Payment Transferred Successfully'}
                 </strong>
               </div>
               <span className={`badge badge-${result.transaction.status.toLowerCase()}`}>
@@ -151,14 +151,11 @@ export default function SendMoneyModal({ userBalance, token, onClose, onTransact
               </span>
             </div>
 
-            <p style={{ fontSize: '0.85rem', color: '#cbd5e1', marginBottom: '0.5rem' }}>
-              {result.message}
+            <p style={{ fontSize: '0.85rem', color: '#cbd5e1' }}>
+              {result.transaction.status === 'UNDER_REVIEW' 
+                ? 'Your transfer has been received and is currently undergoing standard banking verification. You will be notified once complete.'
+                : `Successfully sent $${result.transaction.amount?.toLocaleString()} to ${result.transaction.receiverEmail || 'recipient'}.`}
             </p>
-
-            <div style={{ display: 'flex', gap: '1rem', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-              <span>Risk Score: <strong style={{ color: '#fff' }}>{result.transaction.riskScore}/100</strong></span>
-              <span>Risk Level: <strong style={{ color: '#fff' }}>{result.transaction.riskLevel}</strong></span>
-            </div>
           </div>
         )}
 
