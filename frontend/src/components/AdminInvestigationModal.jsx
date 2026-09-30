@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   X,
   ShieldAlert,
@@ -127,7 +127,7 @@ export default function AdminInvestigationModal({ transactionId, token, onClose,
           <div style={{ background: 'rgba(15, 23, 42, 0.8)', padding: '0.85rem', borderRadius: '0.5rem', border: '1px solid var(--border-color)' }}>
             <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Amount</span>
             <div style={{ fontSize: '1.25rem', fontWeight: '800', color: '#fff', fontFamily: 'var(--font-mono)' }}>
-              ${transaction.amount?.toLocaleString()}
+              ₹{transaction.amount?.toLocaleString('en-IN')}
             </div>
           </div>
 
@@ -166,7 +166,7 @@ export default function AdminInvestigationModal({ transactionId, token, onClose,
             <div>
               <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Historical Avg Amount</span>
               <div style={{ fontWeight: '700', fontFamily: 'var(--font-mono)', color: '#fff' }}>
-                ${behavioralProfile.averageAmount?.toLocaleString()}
+                ₹{behavioralProfile.averageAmount?.toLocaleString('en-IN')}
               </div>
             </div>
             <div>
@@ -184,7 +184,7 @@ export default function AdminInvestigationModal({ transactionId, token, onClose,
             <div>
               <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Current User Balance</span>
               <div style={{ fontWeight: '700', fontFamily: 'var(--font-mono)', color: '#34d399' }}>
-                ${transaction.sender?.balance?.toLocaleString()}
+                ₹{transaction.sender?.balance?.toLocaleString('en-IN')}
               </div>
             </div>
           </div>

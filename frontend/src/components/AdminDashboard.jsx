@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ShieldAlert,
   AlertTriangle,
@@ -212,7 +212,7 @@ export default function AdminDashboard({ token, adminUser, onLogout }) {
               <DollarSign size={18} color="#10b981" />
             </div>
             <div className="stat-value" style={{ color: '#34d399' }}>
-              ${metrics?.totalVolume?.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 }) ?? 0}
+              ₹{metrics?.totalVolume?.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) ?? 0}
             </div>
             <div className="stat-footer">Processed Clean Volume</div>
           </div>
@@ -287,7 +287,7 @@ export default function AdminDashboard({ token, adminUser, onLogout }) {
                           <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{tx.receiverEmail}</div>
                         </td>
                         <td style={{ fontFamily: 'var(--font-mono)', fontWeight: '700', fontSize: '0.95rem', color: '#fff' }}>
-                          ${tx.amount?.toLocaleString()}
+                          ₹{tx.amount?.toLocaleString('en-IN')}
                         </td>
                         <td>
                           <span style={{
@@ -457,7 +457,7 @@ export default function AdminDashboard({ token, adminUser, onLogout }) {
                         </span>
                       </td>
                       <td style={{ fontFamily: 'var(--font-mono)', fontWeight: '700', color: '#34d399' }}>
-                        ${u.balance?.toLocaleString()}
+                        ₹{u.balance?.toLocaleString('en-IN')}
                       </td>
                       <td style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
                         {new Date(u.createdAt).toLocaleDateString()}

@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { UserPlus, ArrowLeft, AlertCircle, CheckCircle2 } from 'lucide-react';
 
 export default function UserRegister({ onRegisterSuccess, onSwitchToLogin }) {
@@ -110,7 +110,7 @@ export default function UserRegister({ onRegisterSuccess, onSwitchToLogin }) {
           </div>
 
           <div className="form-group">
-            <label className="form-label">Initial Test Balance ($ USD)</label>
+            <label className="form-label">Initial Test Balance (₹ INR)</label>
             <input
               type="number"
               className="form-input"

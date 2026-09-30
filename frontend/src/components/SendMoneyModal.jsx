@@ -21,7 +21,7 @@ export default function SendMoneyModal({ userBalance, token, onClose, onTransact
     }
 
     if (numAmount > userBalance) {
-      setError(`Insufficient balance. You have $${userBalance.toLocaleString()} available.`);
+      setError(`Insufficient balance. You have ₹${userBalance.toLocaleString('en-IN')} available.`);
       return;
     }
 
@@ -90,7 +90,7 @@ export default function SendMoneyModal({ userBalance, token, onClose, onTransact
             <div>
               <h2 style={{ fontSize: '1.25rem', fontWeight: '700', color: '#fff' }}>Send Funds</h2>
               <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                Available Balance: <strong style={{ color: '#34d399', fontFamily: 'var(--font-mono)' }}>${userBalance?.toLocaleString()}</strong>
+                Available Balance: <strong style={{ color: '#34d399', fontFamily: 'var(--font-mono)' }}>₹{userBalance?.toLocaleString('en-IN')}</strong>
               </p>
             </div>
           </div>
@@ -106,16 +106,16 @@ export default function SendMoneyModal({ userBalance, token, onClose, onTransact
           </span>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
             <button type="button" onClick={() => applyPreset('normal')} className="btn-secondary" style={{ fontSize: '0.75rem', padding: '0.35rem 0.65rem' }}>
-              Normal ($150)
+              Normal (₹150)
             </button>
             <button type="button" onClick={() => applyPreset('high-amount')} className="btn-secondary" style={{ fontSize: '0.75rem', padding: '0.35rem 0.65rem' }}>
-              High Amount ($18k)
+              High Amount (₹18,000)
             </button>
             <button type="button" onClick={() => applyPreset('unusual-night')} className="btn-secondary" style={{ fontSize: '0.75rem', padding: '0.35rem 0.65rem' }}>
               Night Hours (3 AM)
             </button>
             <button type="button" onClick={() => applyPreset('high-risk-combined')} className="btn-secondary" style={{ fontSize: '0.75rem', padding: '0.35rem 0.65rem', color: '#f87171' }}>
-              Combined High Risk ($24k + 3 AM)
+              Combined High Risk (₹24,000 + 3 AM)
             </button>
           </div>
         </div>
@@ -154,7 +154,7 @@ export default function SendMoneyModal({ userBalance, token, onClose, onTransact
             <p style={{ fontSize: '0.85rem', color: '#cbd5e1' }}>
               {result.transaction.status === 'UNDER_REVIEW' 
                 ? 'Your transfer has been received and is currently undergoing standard banking verification. You will be notified once complete.'
-                : `Successfully sent $${result.transaction.amount?.toLocaleString()} to ${result.transaction.receiverEmail || 'recipient'}.`}
+                : `Successfully sent ₹${result.transaction.amount?.toLocaleString('en-IN')} to ${result.transaction.receiverEmail || 'recipient'}.`}
             </p>
           </div>
         )}
@@ -173,7 +173,7 @@ export default function SendMoneyModal({ userBalance, token, onClose, onTransact
           </div>
 
           <div className="form-group">
-            <label className="form-label">Transfer Amount ($ USD)</label>
+            <label className="form-label">Transfer Amount (₹ INR)</label>
             <input
               type="number"
               className="form-input"

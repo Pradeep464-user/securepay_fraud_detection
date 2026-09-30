@@ -52,7 +52,7 @@ export default function TransactionDetailsModal({ transaction, onClose }) {
           <div>
             <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)' }}>Transfer Amount</span>
             <div style={{ fontSize: '1.75rem', fontWeight: '800', color: '#fff', fontFamily: 'var(--font-mono)' }}>
-              ${amount?.toLocaleString()}
+              ₹{amount?.toLocaleString('en-IN')}
             </div>
           </div>
 

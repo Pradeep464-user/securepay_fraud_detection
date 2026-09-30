@@ -1,4 +1,4 @@
-﻿const express = require('express');
+const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const Transaction = require('../models/Transaction');
@@ -66,7 +66,7 @@ router.post('/send', authenticateToken, async (req, res) => {
     if (sender.balance < transferAmount) {
       return res.status(400).json({
         success: false,
-        message: `Insufficient balance. Available: $${sender.balance.toLocaleString()}, Requested: $${transferAmount.toLocaleString()}`
+        message: `Insufficient balance. Available: ₹${sender.balance.toLocaleString('en-IN')}, Requested: ₹${transferAmount.toLocaleString('en-IN')}`
       });
     }
 

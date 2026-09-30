@@ -132,7 +132,7 @@ export default function UserDashboard({ token, user, onLogout }) {
               </button>
             </div>
             <div className="stat-value" style={{ color: '#34d399' }}>
-              ${currentUser.balance?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              ₹{currentUser.balance?.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </div>
             <div className="stat-footer" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span>FDIC-Insured Virtual Wallet</span>
@@ -268,7 +268,7 @@ export default function UserDashboard({ token, user, onLogout }) {
                           fontSize: '0.95rem',
                           color: isSender ? '#fca5a5' : '#86efac'
                         }}>
-                          {isSender ? `-$${tx.amount.toLocaleString()}` : `+$${tx.amount.toLocaleString()}`}
+                          {isSender ? `-₹${tx.amount.toLocaleString('en-IN')}` : `+₹${tx.amount.toLocaleString('en-IN')}`}
                         </td>
                         <td>
                           <span className={`badge badge-${tx.status?.toLowerCase()}`}>

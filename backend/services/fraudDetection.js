@@ -1,4 +1,4 @@
-﻿const Transaction = require('../models/Transaction');
+const Transaction = require('../models/Transaction');
 
 /**
  * Rule-Based Fraud Detection Engine for SecurePay
@@ -39,10 +39,10 @@ async function analyzeTransactionRisk({ senderId, amount, txTimestamp = new Date
     const ratio = amount / historicalAverage;
     if (ratio >= 8) {
       amountScore += 55;
-      reasons.push(`Transaction amount ($${amount.toLocaleString()}) is ${ratio.toFixed(1)}x higher than user's historical average ($${historicalAverage.toLocaleString()})`);
+      reasons.push(`Transaction amount (₹${amount.toLocaleString('en-IN')}) is ${ratio.toFixed(1)}x higher than user's historical average (₹${historicalAverage.toLocaleString('en-IN')})`);
     } else if (ratio >= 4) {
       amountScore += 40;
-      reasons.push(`Transaction amount ($${amount.toLocaleString()}) is ${ratio.toFixed(1)}x higher than user's historical average ($${historicalAverage.toLocaleString()})`);
+      reasons.push(`Transaction amount (₹${amount.toLocaleString('en-IN')}) is ${ratio.toFixed(1)}x higher than user's historical average (₹${historicalAverage.toLocaleString('en-IN')})`);
     } else if (ratio >= 2.5) {
       amountScore += 25;
       reasons.push(`Transaction amount is ${ratio.toFixed(1)}x user's historical average`);
@@ -52,13 +52,13 @@ async function analyzeTransactionRisk({ senderId, amount, txTimestamp = new Date
   // B. Absolute Amount Thresholds
   if (amount >= 50000) {
     amountScore += 55;
-    reasons.push(`Critical transfer volume: $${amount.toLocaleString()} exceeds extreme threshold ($50,000)`);
+    reasons.push(`Critical transfer volume: ₹${amount.toLocaleString('en-IN')} exceeds extreme threshold (₹50,000)`);
   } else if (amount >= 20000) {
     amountScore += 40;
-    reasons.push(`High transfer volume: $${amount.toLocaleString()} exceeds high-risk tier ($20,000)`);
+    reasons.push(`High transfer volume: ₹${amount.toLocaleString('en-IN')} exceeds high-risk tier (₹20,000)`);
   } else if (amount >= 10000) {
     amountScore += 25;
-    reasons.push(`Substantial transfer: $${amount.toLocaleString()} exceeds standard threshold ($10,000)`);
+    reasons.push(`Substantial transfer: ₹${amount.toLocaleString('en-IN')} exceeds standard threshold (₹10,000)`);
   } else if (amount >= 5000) {
     amountScore += 12;
   }
