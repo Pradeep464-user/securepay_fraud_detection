@@ -3,6 +3,12 @@ const { spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const net = require('net');
+const dns = require('dns');
+
+// Ensure reliable DNS resolution for MongoDB Atlas SRV clusters
+try {
+  dns.setServers(['8.8.8.8', '8.8.4.4', '1.1.1.1']);
+} catch (e) {}
 
 function checkPort(port) {
   return new Promise((resolve) => {
