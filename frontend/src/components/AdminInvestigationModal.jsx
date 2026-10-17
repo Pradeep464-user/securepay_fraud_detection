@@ -12,6 +12,7 @@ import {
   Activity,
   DollarSign
 } from 'lucide-react';
+import { API_BASE } from '../config/api';
 
 export default function AdminInvestigationModal({ transactionId, token, onClose, onDecisionMade }) {
   const [data, setData] = useState(null);
@@ -24,7 +25,7 @@ export default function AdminInvestigationModal({ transactionId, token, onClose,
     async function loadDetails() {
       try {
         setLoading(true);
-        const res = await fetch(`/api/admin/transactions/${transactionId}`, {
+        const res = await fetch(`${API_BASE}/api/admin/transactions/${transactionId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const json = await res.json();
@@ -46,7 +47,7 @@ export default function AdminInvestigationModal({ transactionId, token, onClose,
   const handleDecision = async (decisionType) => {
     try {
       setSubmitting(true);
-      const res = await fetch(`/api/admin/transactions/${transactionId}/decision`, {
+      const res = await fetch(`${API_BASE}/api/admin/transactions/${transactionId}/decision`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

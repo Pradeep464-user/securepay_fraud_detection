@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { UserPlus, ArrowLeft, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { API_BASE } from '../config/api';
 
 export default function UserRegister({ onRegisterSuccess, onSwitchToLogin }) {
   const [name, setName] = useState('');
@@ -20,7 +21,7 @@ export default function UserRegister({ onRegisterSuccess, onSwitchToLogin }) {
 
     try {
       setLoading(true);
-      const res = await fetch('/api/auth/register', {
+      const res = await fetch(`${API_BASE}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

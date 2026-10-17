@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import SendMoneyModal from './SendMoneyModal';
 import TransactionDetailsModal from './TransactionDetailsModal';
+import { API_BASE } from '../config/api';
 
 export default function UserDashboard({ token, user, onLogout }) {
   const [currentUser, setCurrentUser] = useState(user);
@@ -30,7 +31,7 @@ export default function UserDashboard({ token, user, onLogout }) {
     try {
       setRefreshing(true);
       // 1. Fetch user balance & details
-      const userRes = await fetch('/api/auth/me', {
+      const userRes = await fetch(`${API_BASE}/api/auth/me`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (userRes.ok) {
@@ -39,7 +40,7 @@ export default function UserDashboard({ token, user, onLogout }) {
       }
 
       // 2. Fetch my transactions
-      const txRes = await fetch('/api/transactions/my-transactions', {
+      const txRes = await fetch(`${API_BASE}/api/transactions/my-transactions`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (txRes.ok) {

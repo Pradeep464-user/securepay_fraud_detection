@@ -16,6 +16,7 @@ import {
   Clock
 } from 'lucide-react';
 import AdminInvestigationModal from './AdminInvestigationModal';
+import { API_BASE } from '../config/api';
 
 export default function AdminDashboard({ token, adminUser, onLogout }) {
   const [activeTab, setActiveTab] = useState('suspicious');
@@ -32,7 +33,7 @@ export default function AdminDashboard({ token, adminUser, onLogout }) {
     try {
       setRefreshing(true);
       // 1. Metrics
-      const mRes = await fetch('/api/admin/metrics', {
+      const mRes = await fetch(`${API_BASE}/api/admin/metrics`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (mRes.ok) {
@@ -41,7 +42,7 @@ export default function AdminDashboard({ token, adminUser, onLogout }) {
       }
 
       // 2. Transactions
-      const tRes = await fetch('/api/admin/transactions', {
+      const tRes = await fetch(`${API_BASE}/api/admin/transactions`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (tRes.ok) {
@@ -50,7 +51,7 @@ export default function AdminDashboard({ token, adminUser, onLogout }) {
       }
 
       // 3. Fraud Alerts
-      const aRes = await fetch('/api/admin/alerts', {
+      const aRes = await fetch(`${API_BASE}/api/admin/alerts`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (aRes.ok) {
@@ -59,7 +60,7 @@ export default function AdminDashboard({ token, adminUser, onLogout }) {
       }
 
       // 4. Users
-      const uRes = await fetch('/api/admin/users', {
+      const uRes = await fetch(`${API_BASE}/api/admin/users`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (uRes.ok) {

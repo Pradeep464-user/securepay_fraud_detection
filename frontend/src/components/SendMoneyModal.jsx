@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Send, X, AlertCircle, CheckCircle2, ShieldAlert, Sparkles, Clock } from 'lucide-react';
+import { API_BASE } from '../config/api';
 
 export default function SendMoneyModal({ userBalance, token, onClose, onTransactionComplete }) {
   const [receiver, setReceiver] = useState('alex.smith@example.com');
@@ -27,7 +28,7 @@ export default function SendMoneyModal({ userBalance, token, onClose, onTransact
 
     try {
       setLoading(true);
-      const res = await fetch('/api/transactions/send', {
+      const res = await fetch(`${API_BASE}/api/transactions/send`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,6 +1,7 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { ShieldCheck, Lock, Mail, ArrowRight, AlertCircle } from 'lucide-react';
 import loginBg from '../assets/login-background.webp';
+import { API_BASE } from '../config/api';
 
 export default function UserLogin({ onLoginSuccess, onSwitchToRegister, onSwitchToAdmin }) {
   const [email, setEmail] = useState('');
@@ -19,7 +20,7 @@ export default function UserLogin({ onLoginSuccess, onSwitchToRegister, onSwitch
 
     try {
       setLoading(true);
-      const res = await fetch('/api/auth/login', {
+      const res = await fetch(`${API_BASE}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email.trim(), password })
